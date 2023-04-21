@@ -6,6 +6,7 @@ int led5 = 6;
 int led6 = 7;
 int sensorPin = A1; // select the input pin for the sensor
 int sensorval = 0; // variable to store the value coming from the sensor
+int sensorvaltot = 0;
 int soglia = 30;
 int durata = 40;
 int sensibility = 8;
@@ -20,6 +21,14 @@ void setup() {
   pinMode(led5, OUTPUT);
   pinMode(led6, OUTPUT);
   Serial.begin(9600); // initialize serial communication with computer
+
+  for(int i =0; i<100; i++){
+    sensorvaltot = sensorvaltot + analogRead(sensorPin);
+  }
+  soglia = sensorvaltot / 100;
+  soglia = soglia / sensibility;
+  soglia = soglia + 10;
+  Serial.println(soglia);
 
 }
 
